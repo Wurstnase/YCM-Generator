@@ -420,7 +420,7 @@ def parse_flags(build_log):
     # -warnings (-Werror), but no assembler, etc. flags (-Wa,-option)
     # -language (-std=gnu99) and standard library (-nostdlib)
     # -word size (-m64)
-    flags_whitelist = ["-[iIDF].*", "-W[^,]*", "-std=[a-z0-9+]+", "-(no)?std(lib|inc)", "-m[0-9]+"]
+    flags_whitelist = ["-[iIDF].*", "-W[^,]*", "-std=[a-z0-9+]+", "-(no)?std(lib|inc)", "-m[0-9]+", "-target"]
     flags_whitelist = re.compile("|".join(map("^{}$".format, flags_whitelist)))
     flags = set()
     line_count = 0
@@ -430,7 +430,7 @@ def parse_flags(build_log):
     define_regex = re.compile("-D([a-zA-Z0-9_]+)=(.*)")
 
     # Used to only bundle filenames with applicable arguments
-    filename_flags = ["-o", "-I", "-isystem", "-iquote", "-include", "-imacros", "-isysroot"]
+    filename_flags = ["-o", "-I", "-isystem", "-iquote", "-include", "-imacros", "-isysroot", "-target"]
 
     # Process build log
     for line in build_log:
