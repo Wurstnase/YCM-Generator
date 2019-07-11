@@ -36,11 +36,22 @@ import ycm_core
 import re
 import subprocess
 
+import os.path as p
+import sys
+
+DIR_OF_THIS = p.abspath(p.dirname(__file__))
+sys.path.append(DIR_OF_THIS)
+
+try:
+    from ycm_extra_manual_config import extra_flags
+except ImportError:
+    extra_flags = []
 
 flags = [
     # INSERT FLAGS HERE
 ]
 
+flags += extra_flags
 
 def LoadSystemIncludes():
     regex = re.compile(r'(?:\#include \<...\> search starts here\:)(?P<list>.*?)(?:End of search list)', re.DOTALL)
